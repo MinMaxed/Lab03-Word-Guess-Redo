@@ -1,0 +1,11 @@
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\bin\Debug\netcoreapp2.1\WordGuessGame2.deps.json
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\bin\Debug\netcoreapp2.1\WordGuessGame2.runtimeconfig.json
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\bin\Debug\netcoreapp2.1\WordGuessGame2.runtimeconfig.dev.json
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\bin\Debug\netcoreapp2.1\WordGuessGame2.dll
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\bin\Debug\netcoreapp2.1\WordGuessGame2.pdb
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\obj\Debug\netcoreapp2.1\WordGuessGame2.csprojAssemblyReference.cache
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\obj\Debug\netcoreapp2.1\WordGuessGame2.csproj.CoreCompileInputs.cache
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\obj\Debug\netcoreapp2.1\WordGuessGame2.AssemblyInfoInputs.cache
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\obj\Debug\netcoreapp2.1\WordGuessGame2.AssemblyInfo.cs
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\obj\Debug\netcoreapp2.1\WordGuessGame2.dll
+C:\Users\Max\codefellows\401 ASP.NET C#\Lab03-Word-Guess-Redo\WordGuessGame2\WordGuessGame2\obj\Debug\netcoreapp2.1\WordGuessGame2.pdb
