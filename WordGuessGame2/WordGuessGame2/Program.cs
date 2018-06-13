@@ -3,17 +3,16 @@ using System.IO;
 
 namespace WordGuessGame2
 {
-    class Program
+    public class Program
     {
 
-        static string path = "../../../WordGame.txt";
+        public static string path = "../../../WordGame.txt";
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            //string[] realWordBank = .Split();
-            string[] wordBank = { "for", "demi", "nachos" };
+            string[] wordBank = { "for", "demi", "nachos", "coffee", "babbbbbbooooooon" };
             DestroyFile();
-            CreateFile();
+            CreateFile(wordBank);
 
             Console.WriteLine("Hello World!");
 
@@ -45,7 +44,7 @@ namespace WordGuessGame2
             }
         }
 
-        static void GameMenu()
+        public static void GameMenu()
         {
             Console.WriteLine("Welcome to the Word Guess Game!");
             Console.WriteLine("What would you like to do?");
@@ -54,7 +53,8 @@ namespace WordGuessGame2
             Console.WriteLine("3) Exit");
         }
 
-        static string randomWord(string[] words)
+        //selects a word at random from the available options
+        public static string randomWord(string[] words)
         {
             Random random = new Random();
             int randomWord = random.Next(0, words.Length);
@@ -64,7 +64,8 @@ namespace WordGuessGame2
             return gameWord;
         }
 
-        static char[] randomWordArrayed(string word)
+        //turns the word into a character array for use during gameplay to have comparisons for the user guess
+        public static char[] randomWordArrayed(string word)
         {
             string displayWord = word;
             char[] wordarr = displayWord.ToCharArray();
@@ -72,7 +73,8 @@ namespace WordGuessGame2
             return wordarr;
         }
 
-        static string[] DashedWord(char[] wordArr)
+        //make the _ for the user to see
+        public static string[] DashedWord(char[] wordArr)
         {
             string[] mysteryWord = new string[wordArr.Length];
 
@@ -83,7 +85,8 @@ namespace WordGuessGame2
             return mysteryWord;
         }
 
-        static void showTheWord(string[] dashes)
+        //display the _ array
+        public static void showTheWord(string[] dashes)
         {
             for (int i = 0; i < dashes.Length; i++)
             {
@@ -92,22 +95,22 @@ namespace WordGuessGame2
         }
 
         //takes random word and displays the " _ " for each letter in the word
-        static void Play()
+        public static void Play()
         {
             string[] words = CreateWordList();
-            //DashedWord(words);
             string mysteryWord = randomWord(words);
             char[] wordArray = randomWordArrayed(mysteryWord);
             string[] gameWord = DashedWord(wordArray);
             bool gameplay = true;
-
+            
             while (gameplay)
             {
                 Console.Clear();
                 showTheWord(gameWord);
                 Console.WriteLine(" Guess a letter");
-                string userGuess = Console.ReadLine();
+                string userGuess = UserGuess();
                 userGuess = userGuess.ToLower();
+                CheckGuess(mysteryWord, userGuess);
 
                 for (int i = 0; i < wordArray.Length; i++)
                 {
@@ -115,6 +118,7 @@ namespace WordGuessGame2
                     {
                         gameWord[i] = userGuess;
                         Console.Write(gameWord[i]);
+                       
                     }
                     else if (userGuess != wordArray[i].ToString())
                     {
@@ -126,7 +130,30 @@ namespace WordGuessGame2
             Console.Clear();
             Console.WriteLine($"Congrats you got '{mysteryWord}' ");
         }
-        static bool SolutionCheck(string[] guessingArray, char[] solutionArray)
+
+        //for unit testing
+        public static bool CheckGuess(string mysteryWord, string userGuess)
+        {
+            bool result;
+            if (mysteryWord.Contains(userGuess))
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public static string UserGuess()
+        {
+            string userGuess = Console.ReadLine();
+            return userGuess;
+        }
+
+        //compares the users inputs to the solution to check if the game still needs to run or not
+        public static bool SolutionCheck(string[] guessingArray, char[] solutionArray)
         {
             for (int i = 0; i < solutionArray.Length; i++)
             {
@@ -141,11 +168,10 @@ namespace WordGuessGame2
 
         //-----------CRUD-----------------
 
-
-        static void CreateFile()
+        //initiate the file at the beginning of the game
+        public static void CreateFile(string[] wordBank)
         {
             DestroyFile();
-            string[] wordBank = { "for", "demi", "nachos" };
 
             if (!File.Exists(path))
             {
@@ -166,20 +192,20 @@ namespace WordGuessGame2
             }
         }
 
-        static string[] CreateWordList()
+        //converts the file to a string array for use with the game and other methods
+        public static string[] CreateWordList()
         {
             try
             {
                 using (StreamReader read = File.OpenText(path))
                 {
-                    string word = "";
-                    string words = "";
-                    string[] wordBank;
+                    string word = null;
+                    string words = null;
                     while ((word = read.ReadLine()) != null)
                     {
-                        words = word + " ";
+                        words = words + word + " ";
                     }
-                    wordBank = words.Split(" ");
+                    string[] wordBank = words.Trim().Split();
                     return wordBank;
                 }
             }
@@ -191,15 +217,11 @@ namespace WordGuessGame2
 
         }
 
-        static void ReadWords()
+        //takes the file and displays all of the words
+        public static string ReadWords()
         {
             using (StreamReader read = File.OpenText(path))
             {
-                string line = "";
-                while ((line = read.ReadLine()) != null)
-                {
-                    Console.WriteLine(line);
-                }
             }
             try
             {
@@ -209,37 +231,54 @@ namespace WordGuessGame2
                 {
                     Console.WriteLine(value);
                 }
+                Console.WriteLine("complete");
+                return "complete";
             }
             catch (Exception)
             {
-                Console.WriteLine("Could not read all lines");
+                return "Could not read all lines";
             }
         }
 
         //this is allowing the user to add lines to the main file
-        static void AddWords()
+        public static void AddWords(string newWord)
         {
             using (StreamWriter sw = File.AppendText(path))
             {
-                sw.WriteLine(Console.ReadLine());
+                sw.WriteLine(newWord.ToLower());
             }
         }
 
-        static void DeleteWords()
+        //checks to see if the user word is in the list and if so, removes it
+        public static void DeleteWords(string userWord)
         {
             string[] wordBank = CreateWordList();
+            string[] newArray = new string[wordBank.Length - 1];
+            int counter = wordBank.Length;
 
 
+            for (int i = 0; i < wordBank.Length; i++)
+            {
+                if (userWord.ToLower() == wordBank[i])
+                {
+                    continue;
+                }
+                else
+                {
+                    newArray[wordBank.Length - counter] = wordBank[i];
+                    counter--;
+                }
+            }
+            CreateFile(newArray);
         }
 
-
-        static void DestroyFile()
+        public static void DestroyFile()
         {
             File.Delete(path);
         }
 
-
-        static void Admin()
+        //admin/CRUD menu
+        public static void Admin()
         {
 
             bool adminMenu = true;
@@ -266,13 +305,18 @@ namespace WordGuessGame2
 
                     case 2:
                         {
-                            AddWords();
+                            Console.WriteLine("Write a word to add to the list");
+                            string addingWord = Console.ReadLine();
+                            AddWords(addingWord);
                             break;
                         }
 
                     case 3:
                         {
-                            DeleteWords();
+                            ReadWords();
+                            Console.WriteLine("Pick a word to delete");
+                            string deleteWord = Console.ReadLine();
+                            DeleteWords(deleteWord);
                             break;
                         }
 
