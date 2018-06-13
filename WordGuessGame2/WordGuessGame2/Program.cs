@@ -10,6 +10,7 @@ namespace WordGuessGame2
 
         public static void Main(string[] args)
         {
+            //initial work bank, destroys any previous path and then creates a new one from this wordbank. 
             string[] wordBank = { "for", "demi", "nachos", "coffee", "babbbbbbooooooon" };
             DestroyFile();
             CreateFile(wordBank);
@@ -103,6 +104,7 @@ namespace WordGuessGame2
             string[] gameWord = DashedWord(wordArray);
             bool gameplay = true;
             
+            //while the guessing word is still incomplete, the app will continuely ask the user for more inputs before breaking out. 
             while (gameplay)
             {
                 Console.Clear();
@@ -277,6 +279,7 @@ namespace WordGuessGame2
             CreateFile(newArray);
         }
 
+        //delete the file
         public static void DestroyFile()
         {
             File.Delete(path);
