@@ -111,6 +111,9 @@ namespace WordGuessGame2
                 string userGuess = UserGuess();
                 userGuess = userGuess.ToLower();
                 CheckGuess(mysteryWord, userGuess);
+                string pastGuesses = "";
+                pastGuesses = pastGuesses + " " + userGuess;
+                Console.WriteLine($"Guesses: {pastGuesses}");
 
                 for (int i = 0; i < wordArray.Length; i++)
                 {
@@ -124,11 +127,13 @@ namespace WordGuessGame2
                     {
                         Console.Write(" _ ");
                     }
+
                     gameplay = SolutionCheck(gameWord, wordArray);
                 }
             }
             Console.Clear();
             Console.WriteLine($"Congrats you got '{mysteryWord}' ");
+            Console.WriteLine();
         }
 
         //for unit testing
